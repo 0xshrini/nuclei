@@ -2,7 +2,7 @@ id: CVE-2022-29078
 
 info:
   name: ejs template injection vulnerability
-  author: Shrinivas
+  author: Shrini
   severity: CRITICAL
   description: |
     Affected versions of this package are vulnerable to Remote Code Execution (RCE) by passing an unrestricted render option via the view options parameter of renderFile,which makes it possible to inject code into outputFunctionName.
